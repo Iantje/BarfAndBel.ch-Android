@@ -2,24 +2,34 @@ package me.iantje.barfandbelch
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.widget.FrameLayout
 import android.widget.TextView
+import me.iantje.barfandbelch.fragments.AllQuotesFragment
+import me.iantje.barfandbelch.fragments.HomeFragment
+import me.iantje.barfandbelch.fragments.UserFragment
+import me.iantje.barfandbelch.R.id.fragment
 
 class MainActivity : AppCompatActivity() {
+
+    private val homeFragment: HomeFragment = HomeFragment()
+    private val allQuotesFragment: AllQuotesFragment = AllQuotesFragment()
+    private val userFragment: UserFragment = UserFragment()
 
     private lateinit var textMessage: TextView
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-                textMessage.setText(R.string.title_home)
+                changeFragment(homeFragment)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-                textMessage.setText(R.string.title_dashboard)
+                changeFragment(allQuotesFragment)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
-                textMessage.setText(R.string.title_notifications)
+                changeFragment(userFragment)
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -31,7 +41,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
-        textMessage = findViewById(R.id.message)
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+        changeFragment(homeFragment)
+    }
+
+    fun changeFragment(frag: Fragment) {
+        supportFragmentManager.beginTransaction().replace(fragment, frag).commit()
     }
 }

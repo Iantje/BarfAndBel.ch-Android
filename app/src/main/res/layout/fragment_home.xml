@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".fragments.HomeFragment">
+    <ImageView
+            android:src="@drawable/thisisberk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/imageView" android:scaleType="center"/>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_gravity="center" android:layout_margin="15dp">
+        <TextView
+                android:text="&quot;This is Berk. It's a few degrees north of Hopeless and a few degrees south of Freezing to Death.&quot;"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/tillanabold" android:id="@+id/homeQuoteText"
+                android:textAlignment="center"
+                android:textSize="26sp" android:textColor="@android:color/white"/>
+        <TextView
+                android:text="Hiccup Horrendous Haddock III"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/homeQuoteCharacter" android:textAlignment="center"
+                android:textSize="16sp" android:fontFamily="@font/tillanaregular" android:layout_margin="-5dp"
+                android:textColor="@android:color/white"/>
+        <TextView
+                android:text="in How To Train Your Dragon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/homeQuoteSource" android:textAlignment="center"
+                android:fontFamily="@font/tillanaregular" android:textColor="@android:color/white"/>
+    </LinearLayout>
+</FrameLayout>
