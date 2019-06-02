@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.fragment_home.*
 import me.iantje.barfandbelch.R
 import me.iantje.barfandbelch.retrofit.pojos.Quote
 import me.iantje.barfandbelch.retrofit.services.BarfAndBelchService
@@ -33,12 +35,15 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        displayNewQuote()
+    }
+
     fun displayNewQuote() {
         if(retrofit == null) {
-            retrofit = Retrofit.Builder()
-                .baseUrl("https://barfandbel.ch/api/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
+            retrofit = BarfAndBelchService.retrofitBuilder()
         }
 
         val babService = retrofit?.create(BarfAndBelchService::class.java)
@@ -51,8 +56,19 @@ class HomeFragment : Fragment() {
 
             override fun onResponse(call: Call<Quote>, response: Response<Quote>) {
                 // TODO: Replace viewbinding
-            }
+                Log.d(TAG, response.body().toString())
 
+                if(response.body() != null) {
+                    homeQuoteText.text = getString(R.string.quote_text_home, response.body()?.quote)
+                    homeQuoteCharacter.text = response.body()?.character
+                    homeQuoteSource.text = getString(R.string.quote_source_home, response.body()?.source)
+
+                    Glide
+                        .with(view!!)
+                        .load("https://barfandbel.ch/img/bg/" + response.body()?.bgURL)
+                        .into(homeQuoteImage)
+                }
+            }
         })
     }
 

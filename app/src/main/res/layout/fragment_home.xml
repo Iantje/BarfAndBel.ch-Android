@@ -7,7 +7,7 @@
     <ImageView
             android:src="@drawable/thisisberk"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/imageView" android:scaleType="center"/>
+            android:layout_height="wrap_content" android:id="@+id/homeQuoteImage" android:scaleType="center"/>
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
