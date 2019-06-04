@@ -1,22 +1,22 @@
-package me.iantje.barfandbelch.retrofit.pojos
+package me.iantje.barfandbelch.retrofit.pojos.parcelables
 
 import android.os.Parcel
 import android.os.Parcelable
 
-data class Quote(
-    val acceptDate: String,
-    val bgURL: String,
-    val character: String,
-    val episode: String,
-    val id: String,
-    val imgurURL: String,
-    val linkedQuoteID: String,
-    val quote: String,
-    val source: String,
-    val submitDate: String,
-    val timestamp: String,
-    val tumblrURL: String,
-    val userID: String
+class QuoteParcelable(
+    val acceptDate: String?,
+    val bgURL: String?,
+    val character: String?,
+    val episode: String?,
+    val id: String?,
+    val imgurURL: String?,
+    val linkedQuoteID: String?,
+    val quote: String?,
+    val source: String?,
+    val submitDate: String?,
+    val timestamp: String?,
+    val tumblrURL: String?,
+    val userID: String?
 ) : Parcelable {
     constructor(source: Parcel) : this(
         source.readString(),
@@ -54,9 +54,9 @@ data class Quote(
 
     companion object {
         @JvmField
-        val CREATOR: Parcelable.Creator<Quote> = object : Parcelable.Creator<Quote> {
-            override fun createFromParcel(source: Parcel): Quote = Quote(source)
-            override fun newArray(size: Int): Array<Quote?> = arrayOfNulls(size)
+        val CREATOR: Parcelable.Creator<QuoteParcelable> = object : Parcelable.Creator<QuoteParcelable> {
+            override fun createFromParcel(source: Parcel): QuoteParcelable = QuoteParcelable(source)
+            override fun newArray(size: Int): Array<QuoteParcelable?> = arrayOfNulls(size)
         }
     }
 }

@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="QuotePopupAnimation">
+        <item name="android:windowEnterAnimation">@anim/quote_popup_show</item>
+        <item name="android:windowExitAnimation">@anim/quote_popup_hide</item>
+    </style>
+
 </resources>

@@ -1,6 +1,7 @@
 package me.iantje.barfandbelch.fragments
 
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -8,10 +9,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.bumptech.glide.GlideBuilder
+import com.bumptech.glide.load.DecodeFormat
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.bitmap.BitmapEncoder
+import com.bumptech.glide.manager.TargetTracker
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 import kotlinx.android.synthetic.main.fragment_home.*
 import me.iantje.barfandbelch.R
 import me.iantje.barfandbelch.retrofit.pojos.Quote
 import me.iantje.barfandbelch.retrofit.services.BarfAndBelchService
+import me.iantje.barfandbelch.widgets.StaticNotification
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,6 +35,8 @@ class HomeFragment : Fragment() {
 
     private var retrofit: Retrofit? = null
     private val TAG = HomeFragment::class.java.simpleName
+
+    val notification: StaticNotification = StaticNotification()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,7 +66,8 @@ class HomeFragment : Fragment() {
             }
 
             override fun onResponse(call: Call<Quote>, response: Response<Quote>) {
-                // TODO: Replace viewbinding
+                if(view == null) return
+
                 Log.d(TAG, response.body().toString())
 
                 if(response.body() != null) {
@@ -66,7 +78,13 @@ class HomeFragment : Fragment() {
                     Glide
                         .with(view!!)
                         .load("https://barfandbel.ch/img/bg/" + response.body()?.bgURL)
+                        .apply(RequestOptions()
+                            .override(Target.SIZE_ORIGINAL))
                         .into(homeQuoteImage)
+
+                    context?.let {
+                        notification.pushNotification(it, response.body()!!)
+                    }
                 }
             }
         })
