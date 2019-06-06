@@ -10,12 +10,15 @@ import me.iantje.barfandbelch.fragments.AllQuotesFragment
 import me.iantje.barfandbelch.fragments.HomeFragment
 import me.iantje.barfandbelch.fragments.UserFragment
 import me.iantje.barfandbelch.R.id.fragment
+import me.iantje.barfandbelch.widgets.StaticNotification
 
 class MainActivity : AppCompatActivity() {
 
     private val homeFragment: HomeFragment = HomeFragment()
     private val allQuotesFragment: AllQuotesFragment = AllQuotesFragment()
     private val userFragment: UserFragment = UserFragment()
+
+    private val notification = StaticNotification()
 
     private lateinit var textMessage: TextView
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -43,6 +46,8 @@ class MainActivity : AppCompatActivity() {
 
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
         changeFragment(homeFragment)
+
+        //notification.pushNotification(this)
     }
 
     fun changeFragment(frag: Fragment) {

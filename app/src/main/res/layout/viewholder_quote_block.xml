@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:cardCornerRadius="15dp" android:layout_margin="15dp" app:cardBackgroundColor="#8BC34A">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+                    android:text="&quot;This is Berk. It's two days north of Hopeless and a few degrees south of Freezing to Death.&quot;"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/quoteBlockText" android:padding="15dp"
+                    android:fontFamily="@font/tillanasemibold" android:textSize="18sp" android:background="#4CAF50"/>
+            <TextView
+                    android:text="said by Hiccup Horrendous Haddock III"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp" android:id="@+id/quoteBlockCharacter"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/tillanamedium" android:textAlignment="center" android:textSize="16sp"/>
+            <TextView
+                    android:text="in How To Train Your Dragon"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp" android:id="@+id/quoteBlockSource"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/tillanaregular" android:textAlignment="center" android:textSize="14sp"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</android.support.constraint.ConstraintLayout>
