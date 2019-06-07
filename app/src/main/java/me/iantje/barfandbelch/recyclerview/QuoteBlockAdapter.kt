@@ -1,13 +1,13 @@
 package me.iantje.barfandbelch.recyclerview
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import me.iantje.barfandbelch.R
 import me.iantje.barfandbelch.recyclerview.viewholder.QuoteBlockViewholder
 import me.iantje.barfandbelch.retrofit.pojos.Quote
 
-class QuoteBlockAdapter(var quotes: List<Quote>): RecyclerView.Adapter<QuoteBlockViewholder>() {
+class QuoteBlockAdapter(var quotes: List<Quote>): androidx.recyclerview.widget.RecyclerView.Adapter<QuoteBlockViewholder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, position: Int): QuoteBlockViewholder {
         val inflater = LayoutInflater.from(viewGroup.context)

@@ -1,9 +1,9 @@
 package me.iantje.barfandbelch
 
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import android.widget.FrameLayout
 import android.widget.TextView
 import me.iantje.barfandbelch.fragments.AllQuotesFragment
@@ -18,24 +18,25 @@ class MainActivity : AppCompatActivity() {
     private val allQuotesFragment: AllQuotesFragment = AllQuotesFragment()
     private val userFragment: UserFragment = UserFragment()
 
-    private val notification = StaticNotification()
+    private var currentFragment: Fragment = homeFragment
 
-    private lateinit var textMessage: TextView
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-                changeFragment(homeFragment)
-                return@OnNavigationItemSelectedListener true
+                if(currentFragment == homeFragment) {
+                    homeFragment.showNewQuote()
+                }
+                currentFragment = homeFragment
             }
             R.id.navigation_dashboard -> {
-                changeFragment(allQuotesFragment)
-                return@OnNavigationItemSelectedListener true
+                currentFragment = allQuotesFragment
             }
             R.id.navigation_notifications -> {
-                changeFragment(userFragment)
-                return@OnNavigationItemSelectedListener true
+                currentFragment = userFragment
             }
         }
+
+        changeFragment(currentFragment)
         false
     }
 
@@ -45,9 +46,7 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
-        changeFragment(homeFragment)
-
-        //notification.pushNotification(this)
+        changeFragment(currentFragment)
     }
 
     fun changeFragment(frag: Fragment) {

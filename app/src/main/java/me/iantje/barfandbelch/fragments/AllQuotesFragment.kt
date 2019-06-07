@@ -2,10 +2,10 @@ package me.iantje.barfandbelch.fragments
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.view.ViewPager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.*
 import android.widget.PopupWindow
@@ -27,11 +27,11 @@ import retrofit2.converter.gson.GsonConverterFactory
  * A simple [Fragment] subclass.
  *
  */
-class AllQuotesFragment : Fragment(), RecyclerView.OnItemTouchListener {
+class AllQuotesFragment : androidx.fragment.app.Fragment(), androidx.recyclerview.widget.RecyclerView.OnItemTouchListener {
 
     private val TAG: String = AllQuotesFragment::class.java.simpleName
 
-    private lateinit var recycler: RecyclerView
+    private lateinit var recycler: androidx.recyclerview.widget.RecyclerView
     private lateinit var recyclerAdapter: QuoteBlockAdapter
 
     private lateinit var gestureDetector: GestureDetector
@@ -55,7 +55,11 @@ class AllQuotesFragment : Fragment(), RecyclerView.OnItemTouchListener {
         recyclerAdapter = QuoteBlockAdapter(loadedQuotes)
 
         recycler.adapter = recyclerAdapter
-        recycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        recycler.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
+            context,
+            RecyclerView.VERTICAL,
+            false
+        )
 
         super.onViewCreated(view, savedInstanceState)
 
@@ -109,8 +113,8 @@ class AllQuotesFragment : Fragment(), RecyclerView.OnItemTouchListener {
 
                         val popupView = View.inflate(context, R.layout.popup_quote, null)
 
-                        val quotePopup = PopupWindow(popupView, ViewPager.LayoutParams.MATCH_PARENT,
-                            ViewPager.LayoutParams.WRAP_CONTENT, true)
+                        val quotePopup = PopupWindow(popupView, androidx.viewpager.widget.ViewPager.LayoutParams.MATCH_PARENT,
+                            androidx.viewpager.widget.ViewPager.LayoutParams.WRAP_CONTENT, true)
 
                         quotePopup.animationStyle = R.style.QuotePopupAnimation
                         quotePopup.isFocusable = true
@@ -121,7 +125,7 @@ class AllQuotesFragment : Fragment(), RecyclerView.OnItemTouchListener {
                         quotePopup.contentView.quotePopupText.text = childData.quote
 
                         quotePopup.contentView.quotePopupCharacter.text = childData.character
-                        quotePopup.contentView.quotePopupEpisode.text = if(childData.episode!!.isEmpty())
+                        quotePopup.contentView.quotePopupEpisode.text = if(childData.episode.isEmpty())
                             getString(R.string.quote_popup_no_episode) else childData.episode
                         quotePopup.contentView.quotePopupSource.text = childData.source
                         quotePopup.contentView.quotePopupSubmitor.text = "Nothing cus the API is shiiiiiit"
@@ -137,11 +141,11 @@ class AllQuotesFragment : Fragment(), RecyclerView.OnItemTouchListener {
         recycler.addOnItemTouchListener(this)
     }
 
-    override fun onTouchEvent(p0: RecyclerView, p1: MotionEvent) {
+    override fun onTouchEvent(p0: androidx.recyclerview.widget.RecyclerView, p1: MotionEvent) {
 
     }
 
-    override fun onInterceptTouchEvent(p0: RecyclerView, p1: MotionEvent): Boolean {
+    override fun onInterceptTouchEvent(p0: androidx.recyclerview.widget.RecyclerView, p1: MotionEvent): Boolean {
         // Do touch event
         gestureDetector.onTouchEvent(p1)
 

@@ -3,11 +3,15 @@ package me.iantje.barfandbelch.fragments
 
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.bumptech.glide.GlideBuilder
 import com.bumptech.glide.load.DecodeFormat
@@ -20,28 +24,59 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import me.iantje.barfandbelch.R
 import me.iantje.barfandbelch.retrofit.pojos.Quote
 import me.iantje.barfandbelch.retrofit.services.BarfAndBelchService
+import me.iantje.barfandbelch.viewmodel.HomeViewModel
 import me.iantje.barfandbelch.widgets.StaticNotification
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.Executors
 
 /**
  * A simple [Fragment] subclass.
  *
  */
-class HomeFragment : Fragment() {
+class HomeFragment : androidx.fragment.app.Fragment() {
 
     private var retrofit: Retrofit? = null
     private val TAG = HomeFragment::class.java.simpleName
 
     val notification: StaticNotification = StaticNotification()
 
+    private lateinit var viewmodel: HomeViewModel
+    private lateinit var quoteLiveData: LiveData<Quote>
+
+    private val newQuoteExecutor = Executors.newSingleThreadExecutor()
+
+    private val newQuoteObserver: Observer<Quote> = object: Observer<Quote> {
+        override fun onChanged(newQuote: Quote?) {
+            if(view == null) return
+
+            newQuote?.let {
+                homeQuoteText.text = getString(R.string.quote_text_home, it.quote)
+                homeQuoteCharacter.text = it.character
+                homeQuoteSource.text = getString(R.string.quote_source_home, it.source)
+
+                Glide
+                    .with(view!!)
+                    .load(it.bgURL)
+                    .apply(RequestOptions()
+                        .override(Target.SIZE_ORIGINAL))
+                    .into(homeQuoteImage)
+
+                context?.let {immutableContext ->
+                    notification.pushNotification(immutableContext, it)
+                }
+            }
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
@@ -49,45 +84,25 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        displayNewQuote()
+        viewmodel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
+        quoteLiveData = viewmodel.quoteLiveData
+
+        //displayNewQuote()
+        setupObserver()
     }
 
-    fun displayNewQuote() {
-        if(retrofit == null) {
-            retrofit = BarfAndBelchService.retrofitBuilder()
+    private fun setupObserver() {
+        quoteLiveData.observe(this, newQuoteObserver)
+
+        newQuoteExecutor.run {
+            viewmodel.getFreshQuote()
         }
+    }
 
-        val babService = retrofit?.create(BarfAndBelchService::class.java)
-        val quote = babService?.getQuote()
-
-        quote?.enqueue(object: Callback<Quote> {
-            override fun onFailure(call: Call<Quote>, t: Throwable) {
-                Log.e(TAG, "Failed to get quote")
-            }
-
-            override fun onResponse(call: Call<Quote>, response: Response<Quote>) {
-                if(view == null) return
-
-                Log.d(TAG, response.body().toString())
-
-                if(response.body() != null) {
-                    homeQuoteText.text = getString(R.string.quote_text_home, response.body()?.quote)
-                    homeQuoteCharacter.text = response.body()?.character
-                    homeQuoteSource.text = getString(R.string.quote_source_home, response.body()?.source)
-
-                    Glide
-                        .with(view!!)
-                        .load("https://barfandbel.ch/img/bg/" + response.body()?.bgURL)
-                        .apply(RequestOptions()
-                            .override(Target.SIZE_ORIGINAL))
-                        .into(homeQuoteImage)
-
-                    context?.let {
-                        notification.pushNotification(it, response.body()!!)
-                    }
-                }
-            }
-        })
+    fun showNewQuote() {
+        view?.let {
+            viewmodel.getFreshQuote()
+        }
     }
 
 }

@@ -5,16 +5,16 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "local_quotes")
-object LocalQuote {
+data class LocalQuote (
     @PrimaryKey(autoGenerate = true)
-     val id: Int? = null
+     val id: Long? = null,
 
     @ColumnInfo(name = "jsonString")
-     val jsonString: String? = null
+     val jsonString: String? = null,
 
     @ColumnInfo(name = "bgUri")
-     val bgUri: String? = null
+     var bgUri: String? = null,
 
     @ColumnInfo(name = "isViewed")
-     val isViewed: Boolean = false
-}
+     var isViewed: Boolean = false
+)

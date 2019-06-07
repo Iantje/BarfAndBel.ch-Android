@@ -5,6 +5,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface BarfAndBelchService {
 
@@ -22,4 +23,7 @@ interface BarfAndBelchService {
 
     @GET("v2/quote.php?order=id")
     fun getAllQuotes(): Call<Array<Quote>>
+
+    @GET("v2/quote.php")
+    fun getNQuotes(@Query("maxamount") limit: Int): Call<Array<Quote>>
 }

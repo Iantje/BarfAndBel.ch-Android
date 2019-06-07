@@ -5,7 +5,7 @@ import android.os.Parcelable
 
 data class Quote(
     val acceptDate: String,
-    val bgURL: String,
+    var bgURL: String,
     val character: String,
     val episode: String,
     val id: String,
