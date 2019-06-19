@@ -174,7 +174,7 @@ class QuoteRepository(private val context: Context) {
             httpClient.newCall(httpRequest).enqueue(object: okhttp3.Callback {
                 override fun onFailure(call: okhttp3.Call, e: IOException) {
                     // TODO: Something with error
-                    Log.e("Calling image went wron", e.message)
+                    Log.e("Error calling image", e.message)
                 }
 
                 override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
