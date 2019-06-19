@@ -4,23 +4,22 @@ import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
-import android.widget.FrameLayout
-import android.widget.TextView
 import me.iantje.barfandbelch.fragments.AllQuotesFragment
 import me.iantje.barfandbelch.fragments.HomeFragment
-import me.iantje.barfandbelch.fragments.UserFragment
+import me.iantje.barfandbelch.fragments.ToolsFragment
 import me.iantje.barfandbelch.R.id.fragment
-import me.iantje.barfandbelch.widgets.StaticNotification
 
 class MainActivity : AppCompatActivity() {
 
     private val homeFragment: HomeFragment = HomeFragment()
     private val allQuotesFragment: AllQuotesFragment = AllQuotesFragment()
-    private val userFragment: UserFragment = UserFragment()
+    private val userFragment: ToolsFragment = ToolsFragment()
 
     private var currentFragment: Fragment = homeFragment
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        item.isChecked = true
+
         when (item.itemId) {
             R.id.navigation_home -> {
                 if(currentFragment == homeFragment) {

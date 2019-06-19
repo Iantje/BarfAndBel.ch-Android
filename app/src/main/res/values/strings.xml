@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">BarfAndBel.ch</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_home_navbar">Home</string>
+    <string name="title_all_quotes_navbar">All Quotes</string>
+    <string name="title_extras_navbar">Extras</string>
 
-    <string name="quote_text_home">"%1$s"</string>
+    <string name="quote_text_home">\"%1$s\"</string>
     <string name="quote_source_home">in %1$s</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -15,4 +15,6 @@
     <string name="quote_popup_episode">Episode</string>
     <string name="quote_popup_submitor">Submitted by</string>
     <string name="quote_popup_no_episode">None</string>
+    <string name="quote_background_content_description">Quote Background</string>
+    <string name="quote_detail_background_contentdescription">Quote Background</string>
 </resources>

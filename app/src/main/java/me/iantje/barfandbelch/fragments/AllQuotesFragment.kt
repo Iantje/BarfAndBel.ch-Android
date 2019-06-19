@@ -4,7 +4,6 @@ package me.iantje.barfandbelch.fragments
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.*
@@ -16,22 +15,20 @@ import me.iantje.barfandbelch.R
 import me.iantje.barfandbelch.recyclerview.QuoteBlockAdapter
 import me.iantje.barfandbelch.retrofit.pojos.Quote
 import me.iantje.barfandbelch.retrofit.services.BarfAndBelchService
-import me.iantje.barfandbelch.widgets.StaticNotification
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 /**
  * A simple [Fragment] subclass.
  *
  */
-class AllQuotesFragment : androidx.fragment.app.Fragment(), androidx.recyclerview.widget.RecyclerView.OnItemTouchListener {
+class AllQuotesFragment : Fragment(), RecyclerView.OnItemTouchListener {
 
     private val TAG: String = AllQuotesFragment::class.java.simpleName
 
-    private lateinit var recycler: androidx.recyclerview.widget.RecyclerView
+    private lateinit var recycler: RecyclerView
     private lateinit var recyclerAdapter: QuoteBlockAdapter
 
     private lateinit var gestureDetector: GestureDetector
@@ -40,6 +37,9 @@ class AllQuotesFragment : androidx.fragment.app.Fragment(), androidx.recyclervie
 
     private var loadedQuotes: ArrayList<Quote> = ArrayList()
     private var retrofit: Retrofit? = null
+
+    private var detailInFragment: Boolean = false
+    private lateinit var detailFragment: QuoteDetailFragment
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,8 +63,18 @@ class AllQuotesFragment : androidx.fragment.app.Fragment(), androidx.recyclervie
 
         super.onViewCreated(view, savedInstanceState)
 
+        checkIfDetailInView()
         loadQuotes()
         createRecyclerTouchListener()
+    }
+
+    fun checkIfDetailInView() {
+        if(allQuotesDetailContainer != null) {
+            detailInFragment = true
+
+            detailFragment = QuoteDetailFragment()
+            childFragmentManager.beginTransaction().replace(R.id.allQuotesDetailContainer, detailFragment).commit()
+        }
     }
 
     fun loadQuotes() {
@@ -111,26 +121,11 @@ class AllQuotesFragment : androidx.fragment.app.Fragment(), androidx.recyclervie
                         val childPos = recycler.getChildAdapterPosition(mutableChild)
                         val childData = recyclerAdapter.quotes[childPos]
 
-                        val popupView = View.inflate(context, R.layout.popup_quote, null)
-
-                        val quotePopup = PopupWindow(popupView, androidx.viewpager.widget.ViewPager.LayoutParams.MATCH_PARENT,
-                            androidx.viewpager.widget.ViewPager.LayoutParams.WRAP_CONTENT, true)
-
-                        quotePopup.animationStyle = R.style.QuotePopupAnimation
-                        quotePopup.isFocusable = true
-
-                        Glide.with(quotePopup.contentView)
-                            .load("https://barfandbel.ch/img/bg/" + childData.bgURL)
-                            .into(quotePopup.contentView.quotePopupImage)
-                        quotePopup.contentView.quotePopupText.text = childData.quote
-
-                        quotePopup.contentView.quotePopupCharacter.text = childData.character
-                        quotePopup.contentView.quotePopupEpisode.text = if(childData.episode.isEmpty())
-                            getString(R.string.quote_popup_no_episode) else childData.episode
-                        quotePopup.contentView.quotePopupSource.text = childData.source
-                        quotePopup.contentView.quotePopupSubmitor.text = "Nothing cus the API is shiiiiiit"
-
-                        quotePopup.showAtLocation(container, Gravity.BOTTOM, 0, 0)
+                        if(!detailInFragment) {
+                            openDetailPopup(childData)
+                        } else {
+                            updateTabletContainer(childData)
+                        }
                     }
                 }
 
@@ -141,11 +136,11 @@ class AllQuotesFragment : androidx.fragment.app.Fragment(), androidx.recyclervie
         recycler.addOnItemTouchListener(this)
     }
 
-    override fun onTouchEvent(p0: androidx.recyclerview.widget.RecyclerView, p1: MotionEvent) {
+    override fun onTouchEvent(p0: RecyclerView, p1: MotionEvent) {
 
     }
 
-    override fun onInterceptTouchEvent(p0: androidx.recyclerview.widget.RecyclerView, p1: MotionEvent): Boolean {
+    override fun onInterceptTouchEvent(p0: RecyclerView, p1: MotionEvent): Boolean {
         // Do touch event
         gestureDetector.onTouchEvent(p1)
 
@@ -156,4 +151,32 @@ class AllQuotesFragment : androidx.fragment.app.Fragment(), androidx.recyclervie
 
     }
 
+    fun openDetailPopup(quoteData: Quote) {
+        val popupView = View.inflate(context, R.layout.popup_quote, null)
+
+        val quotePopup = PopupWindow(popupView, ViewPager.LayoutParams.MATCH_PARENT,
+            ViewPager.LayoutParams.WRAP_CONTENT, true)
+
+        quotePopup.animationStyle = R.style.QuotePopupAnimation
+        quotePopup.isFocusable = true
+
+        Glide.with(quotePopup.contentView)
+            .load("https://barfandbel.ch/img/bg/" + quoteData.bgURL)
+            .into(quotePopup.contentView.quotePopupImage)
+        quotePopup.contentView.quotePopupText.text = quoteData.quote
+
+        quotePopup.contentView.quotePopupCharacter.text = quoteData.character
+        quoteData.episode?.let {
+            quotePopup.contentView.quotePopupEpisode.text = if(quoteData.episode.isEmpty())
+                getString(R.string.quote_popup_no_episode) else quoteData.episode
+        }
+        quotePopup.contentView.quotePopupSource.text = quoteData.source
+        quotePopup.contentView.quotePopupSubmitor.text = "Nothing cus the API is shiiiiiit"
+
+        quotePopup.showAtLocation(container, Gravity.BOTTOM, 0, 0)
+    }
+
+    fun updateTabletContainer(quoteData: Quote) {
+        detailFragment.fillData(quoteData)
+    }
 }

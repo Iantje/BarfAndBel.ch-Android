@@ -31,9 +31,6 @@ class QuoteRepository(private val context: Context) {
 
     private var localQuoteDb: LocalQuoteDb = LocalQuoteDb.getInstance(context)
 
-    //private var nFreshQuotes: LiveData<Int>
-    //private var nViewedQuotes: LiveData<Int>
-
     private var retrofit: Retrofit = BarfAndBelchService.retrofitBuilder()
     private var babService: BarfAndBelchService
 
@@ -42,9 +39,6 @@ class QuoteRepository(private val context: Context) {
     private val databaseExecutor = Executors.newSingleThreadExecutor()
 
     init {
-        //nFreshQuotes = localQuoteDb.localQuoteDao().getNFreshQuotes()
-        //nViewedQuotes = localQuoteDb.localQuoteDao().getNViewedQuotes()
-
         babService = retrofit.create(BarfAndBelchService::class.java)
     }
 

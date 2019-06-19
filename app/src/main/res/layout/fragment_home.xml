@@ -4,32 +4,55 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context=".fragments.HomeFragment">
-    <ImageView
-            android:src="@drawable/thisisberk"
+    <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:id="@+id/homeQuoteImage" android:scaleType="centerCrop"
-    />
-    <LinearLayout
-            android:orientation="vertical"
+            android:layout_height="match_parent" android:id="@+id/homeQuoteContainer" android:visibility="invisible">
+
+        <ImageView
+                android:src="@drawable/thisisberk"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:id="@+id/homeQuoteImage" android:scaleType="centerCrop"
+                android:contentDescription="@string/quote_background_content_description"/>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_gravity="center" android:layout_margin="15dp">
+            <TextView
+                    tools:text="&quot;This is Berk. It's a few degrees north of Hopeless and a few degrees south of Freezing to Death.&quot;"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/tillanabold" android:id="@+id/homeQuoteText"
+                    android:textAlignment="center"
+                    android:textSize="26sp" android:textColor="@android:color/white"/>
+            <TextView
+                    tools:text="Hiccup Horrendous Haddock III"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/homeQuoteCharacter"
+                    android:textAlignment="center"
+                    android:textSize="16sp" android:fontFamily="@font/tillanaregular" android:layout_margin="-5dp"
+                    android:textColor="@android:color/white"/>
+            <TextView
+                    tools:text="in How To Train Your Dragon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/homeQuoteSource"
+                    android:textAlignment="center"
+                    android:fontFamily="@font/tillanaregular" android:textColor="@android:color/white"/>
+        </LinearLayout>
+    </FrameLayout>
+    <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_gravity="center" android:layout_margin="15dp">
-        <TextView
-                android:text="&quot;This is Berk. It's a few degrees north of Hopeless and a few degrees south of Freezing to Death.&quot;"
+            android:layout_height="match_parent" android:id="@+id/homeLoadContainer">
+
+        <ImageView
+                android:src="@drawable/bg_paper_burned"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:scaleType="centerCrop"
+                app:srcCompat="@drawable/bg_paper_burned" android:tint="@color/backgroundImageTint"/>
+        <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/tillanabold" android:id="@+id/homeQuoteText"
-                android:textAlignment="center"
-                android:textSize="26sp" android:textColor="@android:color/white"/>
-        <TextView
-                android:text="Hiccup Horrendous Haddock III"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/homeQuoteCharacter" android:textAlignment="center"
-                android:textSize="16sp" android:fontFamily="@font/tillanaregular" android:layout_margin="-5dp"
-                android:textColor="@android:color/white"/>
-        <TextView
-                android:text="in How To Train Your Dragon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/homeQuoteSource" android:textAlignment="center"
-                android:fontFamily="@font/tillanaregular" android:textColor="@android:color/white"/>
-    </LinearLayout>
+                android:layout_height="35dp"
+                android:id="@+id/homeLoadProgressbar" android:indeterminate="true" android:layout_gravity="center"
+                android:layout_margin="15dp" android:indeterminateTint="@color/progressBarTint"/>
+    </FrameLayout>
 </FrameLayout>

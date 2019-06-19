@@ -5,7 +5,7 @@
              android:layout_height="match_parent"
              tools:context=".fragments.AllQuotesFragment" android:orientation="vertical" android:background="#FDEBD0">
     <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
+            android:layout_width="match_parent" android:paddingBottom="?actionBarSize" android:clipToPadding="false"
             android:layout_height="match_parent" android:id="@+id/allQuotesRecycler"
     />
 </FrameLayout>

@@ -17,8 +17,6 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
 
     private val quoteRepository: QuoteRepository = QuoteRepository(getApplication())
 
-    private val databaseExecutor = Executors.newSingleThreadExecutor()
-
     val quoteLiveData: MutableLiveData<Quote> = MutableLiveData()
 
     fun getFreshQuote() {

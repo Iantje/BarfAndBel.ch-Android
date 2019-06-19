@@ -6,7 +6,7 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.viewholder_quote_block.view.*
 import me.iantje.barfandbelch.retrofit.pojos.Quote
 
-class QuoteBlockViewholder(private val view: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
+class QuoteBlockViewholder(private val view: View): RecyclerView.ViewHolder(view) {
 
     fun fillBlock(quote: Quote) {
         view.quoteBlockText.text = quote.quote
