@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.util.Log
+import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -67,22 +68,13 @@ class HomeFragment : androidx.fragment.app.Fragment() {
                     .apply(RequestOptions()
                         .override(Target.SIZE_ORIGINAL))
                     .addListener(object:RequestListener<Drawable> {
-                        override fun onLoadFailed(
-                            e: GlideException?,
-                            model: Any?,
-                            target: Target<Drawable>?,
-                            isFirstResource: Boolean
-                        ): Boolean {
+                        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?,
+                                                  isFirstResource: Boolean): Boolean {
                             TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                         }
 
-                        override fun onResourceReady(
-                            resource: Drawable?,
-                            model: Any?,
-                            target: Target<Drawable>?,
-                            dataSource: DataSource?,
-                            isFirstResource: Boolean
-                        ): Boolean {
+                        override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?,
+                            dataSource: DataSource?, isFirstResource: Boolean): Boolean {
                             // Show the quote when image is loaded
                             homeLoadContainer.visibility = View.GONE
                             homeQuoteContainer.visibility = View.VISIBLE
@@ -103,9 +95,11 @@ class HomeFragment : androidx.fragment.app.Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val contextThemeWrapper = ContextThemeWrapper(activity, R.style.HomeFragmentTextOutline)
+        val localInflater = inflater.cloneInContext(contextThemeWrapper)
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        return localInflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

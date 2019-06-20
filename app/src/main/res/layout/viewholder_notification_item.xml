@@ -10,7 +10,7 @@
             android:layout_height="wrap_content" app:cardUseCompatPadding="true"
             app:contentPadding="8dp" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintBottom_toBottomOf="parent" app:cardBackgroundColor="@android:color/white">
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -19,12 +19,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" android:id="@+id/notifItemType" tools:text="Monthly"
                     android:textSize="18sp" android:textStyle="bold"
-                    android:gravity="center" android:textAlignment="viewStart"/>
+                    android:gravity="center" android:textAlignment="viewStart"
+                    android:textColor="@color/defaultTextColor"/>
             <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     tools:text="Every 5th at 9:00" android:textAlignment="textEnd"
-                    android:gravity="center" android:id="@+id/notifItemDescription" android:layout_weight="1"/>
+                    android:gravity="center" android:id="@+id/notifItemDescription" android:layout_weight="1"
+                    android:textColor="@color/defaultTextColor"/>
             <Switch
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/notifItemSwitch"

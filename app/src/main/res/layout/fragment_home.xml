@@ -36,7 +36,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/homeQuoteSource"
                     android:textAlignment="center"
-                    android:fontFamily="@font/tillanaregular" android:textColor="@android:color/white"/>
+                    android:fontFamily="@font/tillanaregular" android:textColor="@android:color/white"
+                    android:visibility="visible"/>
         </LinearLayout>
     </FrameLayout>
     <FrameLayout

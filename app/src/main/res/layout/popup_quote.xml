@@ -41,12 +41,13 @@
                             android:text="@string/quote_popup_character"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:textSize="16sp"
-                            android:fontFamily="@font/tillanabold"/>
+                            android:fontFamily="@font/tillanabold" android:textColor="@color/defaultTextColor"/>
                     <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" android:id="@+id/quotePopupCharacter"
                             android:textAlignment="textEnd" tools:text="Hiccup Horrendous Haddock III"
-                            android:fontFamily="@font/tillanaregular" android:textSize="18sp"/>
+                            android:fontFamily="@font/tillanaregular" android:textSize="18sp"
+                            android:textColor="@color/defaultTextColor"/>
                 </LinearLayout>
                 <LinearLayout
                         android:orientation="horizontal"
@@ -57,12 +58,13 @@
                             android:text="@string/quote_character_source"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:textSize="16sp"
-                            android:fontFamily="@font/tillanabold"/>
+                            android:fontFamily="@font/tillanabold" android:textColor="@color/defaultTextColor"/>
                     <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" android:id="@+id/quotePopupSource"
                             android:textAlignment="textEnd" tools:text="How To Train Your Dragon"
-                            android:fontFamily="@font/tillanaregular" android:textSize="18sp"/>
+                            android:fontFamily="@font/tillanaregular" android:textSize="18sp"
+                            android:textColor="@color/defaultTextColor"/>
                 </LinearLayout>
                 <LinearLayout
                         android:orientation="horizontal"
@@ -73,28 +75,30 @@
                             android:text="@string/quote_popup_episode"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:textSize="16sp"
-                            android:fontFamily="@font/tillanabold"/>
+                            android:fontFamily="@font/tillanabold" android:textColor="@color/defaultTextColor"/>
                     <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" android:id="@+id/quotePopupEpisode"
                             android:textAlignment="textEnd" tools:text="None"
-                            android:fontFamily="@font/tillanaregular" android:textSize="18sp"/>
+                            android:fontFamily="@font/tillanaregular" android:textSize="18sp"
+                            android:textColor="@color/defaultTextColor"/>
                 </LinearLayout>
                 <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" android:paddingTop="5dp" android:paddingBottom="5dp"
-                        android:paddingLeft="15dp" android:paddingRight="15dp">
+                        android:paddingLeft="15dp" android:paddingRight="15dp" android:visibility="gone">
                     <TextView
                             android:text="@string/quote_popup_submitor"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:textSize="16sp"
-                            android:fontFamily="@font/tillanabold"/>
+                            android:fontFamily="@font/tillanabold" android:textColor="@color/defaultTextColor"/>
                     <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" android:id="@+id/quotePopupSubmitor"
                             android:textAlignment="textEnd" tools:text="Iantje"
-                            android:fontFamily="@font/tillanaregular" android:textSize="18sp"/>
+                            android:fontFamily="@font/tillanaregular" android:textSize="18sp"
+                            android:textColor="@color/defaultTextColor"/>
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

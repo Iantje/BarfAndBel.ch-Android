@@ -83,7 +83,8 @@
                                 tools:text="No episode" android:fontFamily="@font/tillanaregular"
                                 android:textColor="@android:color/white"/>
                     </TableRow>
-                    <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
+                    <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                              android:visibility="gone">
                         <TextView
                                 android:text="@string/quote_popup_submitor"
                                 android:layout_width="wrap_content"

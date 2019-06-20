@@ -1,16 +1,18 @@
 package me.iantje.barfandbelch.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import me.iantje.barfandbelch.localdbs.objects.NotificationScheduleItem
+import me.iantje.barfandbelch.notifications.NotificationScheduler
 import me.iantje.barfandbelch.repository.WidgetRepository
 
-class ToolsViewModel(application: Application): AndroidViewModel(application) {
+class ToolsViewModel(private val app: Application): AndroidViewModel(app) {
 
-    val widgetRepository = WidgetRepository(application.applicationContext)
+    private val widgetRepository = WidgetRepository(app.applicationContext)
 
     val notificationItems = MutableLiveData<List<NotificationScheduleItem>>()
 
@@ -22,7 +24,9 @@ class ToolsViewModel(application: Application): AndroidViewModel(application) {
 
     fun addNotificationItem(item: NotificationScheduleItem) {
         GlobalScope.launch {
-            widgetRepository.addNotificaationItem(item)
+            val newItemId = widgetRepository.addNotificationItem(item)
+
+            NotificationScheduler().scheduleNotification(newItemId, app.applicationContext)
 
             refreshNotificationItems()
         }

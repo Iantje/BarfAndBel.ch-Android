@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+            android:layout_height="match_parent" android:background="#11ffffff">
+
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_margin="15dp" app:contentPadding="8dp">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+                    android:text="Add Notification"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:textSize="18sp"
+                    android:textAlignment="center" android:textStyle="bold"/>
+            <TextView
+                    android:text="Frequency"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/notification_frequency_options"
+                    android:id="@+id/addNotificationTypeSpinner"/>
+            <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="?android:attr/listDivider"
+            />
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:id="@+id/addNotificationHourContainer"
+                    android:visibility="visible">
+                <TextView
+                        android:text="Minute of the hour"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberSigned"
+                        android:ems="10"
+                        android:id="@+id/addNotificationMinuteInput"/>
+                <TextView
+                        android:text="Every x hours"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberSigned"
+                        android:ems="10"
+                        android:id="@+id/addNotificationHourInput"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:id="@+id/addNotificationDailyInputContainer"
+                    android:visibility="visible">
+                <TextView
+                        android:text="Time of the day"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="time"
+                        android:ems="10"
+                        android:id="@+id/addNotificationTimeInput"/>
+                <TextView
+                        android:text="Every x days"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberSigned"
+                        android:ems="10"
+                        android:id="@+id/addNotificationDayInput"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:id="@+id/addNotificationWeeklyContainer"
+                    android:visibility="gone">
+                <TextView
+                        android:text="Day of the week"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/addNotificationWeekdaySpinner"
+                        android:entries="@array/weekdays"/>
+                <TextView
+                        android:text="Time of day"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="time"
+                        android:ems="10"
+                        android:id="@+id/addNotificationWeekTimeInput"/>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</ScrollView>

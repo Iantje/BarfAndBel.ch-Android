@@ -3,11 +3,12 @@
               xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              tools:context=".fragments.ToolsFragment" android:padding="15dp" android:orientation="vertical">
+              tools:context=".fragments.ToolsFragment" android:padding="15dp" android:orientation="vertical"
+              android:background="@android:color/white">
     <TextView
             android:text="Setup Notifications"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:textSize="18sp"/>
+            android:layout_height="wrap_content" android:textSize="18sp" android:textColor="@color/defaultTextColor"/>
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="250dp" android:paddingTop="15dp" android:id="@+id/notificationRecycler">

@@ -4,11 +4,14 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import me.iantje.barfandbelch.localdbs.doa.WidgetsDao
+import me.iantje.barfandbelch.localdbs.objects.NotificationNextTime
 import me.iantje.barfandbelch.localdbs.objects.NotificationScheduleItem
 
 
-@Database(entities = [NotificationScheduleItem::class], version = 1, exportSchema = false)
+@Database(entities = [NotificationScheduleItem::class, NotificationNextTime::class], version = 2, exportSchema = false)
 abstract class WidgetsDb: RoomDatabase() {
     abstract fun WidgetsDao(): WidgetsDao
 
@@ -23,6 +26,7 @@ abstract class WidgetsDb: RoomDatabase() {
                 synchronized(WidgetsDb::class.java) {
                     if (INSTANCE == null) {
                         INSTANCE = Room.databaseBuilder(context.applicationContext, WidgetsDb::class.java, DATABASE_NAME)
+                            .fallbackToDestructiveMigration()
                             .build()
                     }
                 }

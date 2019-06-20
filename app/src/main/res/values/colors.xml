@@ -5,4 +5,5 @@
     <color name="colorAccent">#D81B60</color>
     <color name="progressBarTint">#167E25</color>
     <color name="backgroundImageTint">#56025E05</color>
+    <color name="defaultTextColor">#99000000</color>
 </resources>

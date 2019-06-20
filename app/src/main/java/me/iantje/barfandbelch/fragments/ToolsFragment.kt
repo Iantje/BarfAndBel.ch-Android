@@ -2,6 +2,7 @@ package me.iantje.barfandbelch.fragments
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,8 +18,10 @@ import me.iantje.barfandbelch.R
 import me.iantje.barfandbelch.localdbs.objects.NotificationFrequency
 import me.iantje.barfandbelch.localdbs.objects.NotificationScheduleItem
 import me.iantje.barfandbelch.localdbs.objects.NotificationType
+import me.iantje.barfandbelch.notifications.NotificationScheduler
 import me.iantje.barfandbelch.recyclerview.NotificationItemAdapter
 import me.iantje.barfandbelch.viewmodel.ToolsViewModel
+import org.json.JSONObject
 
 /**
  * A simple [Fragment] subclass.
@@ -51,9 +54,15 @@ class ToolsFragment : androidx.fragment.app.Fragment() {
         toolsViewModel.refreshNotificationItems()
 
         addNotifItemBtn.setOnClickListener {
+            val notificationData = JSONObject()
+            notificationData.put(NotificationScheduler.MINUTE_DATA, 25)
+            notificationData.put(NotificationScheduler.INTERVAL_DATA, 1)
+
             toolsViewModel.addNotificationItem(
                 NotificationScheduleItem(null, NotificationType.FullQuote,
-                    NotificationFrequency.Month, "", true))
+                    NotificationFrequency.Hour, notificationData.toString(), true))
+
+            Log.d("JSONobject to String", notificationData.toString())
         }
 
         setItemTouchHelpers()

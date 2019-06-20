@@ -18,4 +18,20 @@
     <string name="quote_background_content_description">Quote Background</string>
     <string name="quote_detail_background_contentdescription">Quote Background</string>
     <string name="storage_permission_denied">Storage permission denied. Unable to change background.</string>
+    <string name="scheduled_notification_description">Scheduled quote notifications set by the user in the app</string>
+    <string name="scheduled_notification_title">Quote by %1$s</string>
+    <string name="scheduled_notification_unfold">Unfold to view quote</string>
+    <string-array name="notification_frequency_options">
+        <item>Hourly</item>
+        <item>Daily</item>
+    </string-array>
+    <string-array name="weekdays">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
 </resources>
